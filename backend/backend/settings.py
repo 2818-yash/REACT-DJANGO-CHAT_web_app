@@ -8,6 +8,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "react-django-chat-web-app.onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
@@ -16,9 +18,9 @@ ALLOWED_HOSTS = [
 # APPLICATIONS
 # =========================
 INSTALLED_APPS = [
-    'daphne',                 # ✅ REQUIRED for Channels
+    'daphne',                 
     'channels',
-    'corsheaders',            # ✅ YOU WERE MISSING THIS
+    'corsheaders',            
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,12 +139,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
     "https://react-django-chat-web-app-vqpo.vercel.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 
-CORS_ALLOWED_ORIGINS = [
-    "https://react-django-chat-web-app-vqpo.vercel.app",
-]
 
 
 
