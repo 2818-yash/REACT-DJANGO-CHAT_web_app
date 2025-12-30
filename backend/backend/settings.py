@@ -4,23 +4,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-0y&&c%o2d4%ii+iued5oa26i7k+j*^*2%3^)!3d!40h!$9t)f$'
 
+# 🔒 PRODUCTION
 DEBUG = False
 
 ALLOWED_HOSTS = [
     "react-django-chat-web-app.onrender.com",
-    "localhost",
-    "127.0.0.1",
 ]
-
-
 
 # =========================
 # APPLICATIONS
 # =========================
 INSTALLED_APPS = [
-    'daphne',                 
+    'daphne',
     'channels',
-    'corsheaders',            
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,7 +26,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
 ]
-
 
 # =========================
 # MIDDLEWARE
@@ -45,8 +41,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# =========================
+# CORS (ONLY FRONTEND)
+# =========================
+CORS_ALLOW_ALL_ORIGINS = False
 
+CORS_ALLOWED_ORIGINS = [
+    "https://react-django-chat-web-app.vercel.app/",
+]
+
+# =========================
+# CSRF (CRITICAL)
+# =========================
+CSRF_TRUSTED_ORIGINS = [
+    "https://react-django-chat-web-app.vercel.app/",
+    "https://react-django-chat-web-app.onrender.com",
+]
 
 # =========================
 # URL & TEMPLATES
@@ -68,16 +78,14 @@ TEMPLATES = [
     },
 ]
 
-
 # =========================
 # ASGI / WSGI
 # =========================
 ASGI_APPLICATION = 'backend.asgi.application'
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
 # =========================
-# DATABASE
+# DATABASE (RENDER SQLITE OK)
 # =========================
 DATABASES = {
     'default': {
@@ -86,25 +94,15 @@ DATABASES = {
     }
 }
 
-
 # =========================
-# AUTH VALIDATION
+# PASSWORD VALIDATION
 # =========================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
 
 # =========================
 # INTERNATIONALIZATION
@@ -114,16 +112,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-
 # =========================
-# CHANNELS CONFIG
+# CHANNELS
 # =========================
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }
-
 
 # =========================
 # STATIC & MEDIA
@@ -133,17 +129,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://react-django-chat-web-app-vqpo.vercel.app",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-
-
-
-
-
+# =========================
+# SECURITY (RENDER HTTPS)
+# =========================
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

@@ -9,6 +9,8 @@ from asgiref.sync import async_to_sync
 
 
 
+
+
 @api_view(["POST"])
 def register(request):
     username = request.data.get("username")
@@ -196,10 +198,8 @@ def get_messages(request):
     ])
 
 
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 
-@csrf_exempt
 @api_view(["POST"])
 def send_image(request):
     chat_id = request.data.get("chat_id")
