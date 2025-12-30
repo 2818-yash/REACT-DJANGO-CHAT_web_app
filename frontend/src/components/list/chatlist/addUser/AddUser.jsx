@@ -2,13 +2,10 @@ import { useEffect, useState } from "react";
 import "./adduser.css";
 import { API_BASE } from "@/config";
 
-
 function AddUser({ onAdd, currentUser }) {
   const [username, setUsername] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   // ✅ LOAD SUGGESTED USERS
   useEffect(() => {
@@ -18,18 +15,13 @@ function AddUser({ onAdd, currentUser }) {
       setLoading(true);
       try {
         const res = await fetch(
-          `${API_BASE}/api/users/search/?q=`
+          `${API_BASE}/api/users/search/?q=&current_user_id=${currentUser.id}`
         );
         if (!res.ok) return;
 
         const data = await res.json();
 
-        const filtered = data.filter(
-          (u) => u.id !== currentUser.id
-        );
-
-        // 🎯 ADD FAKE ONLINE STATUS (UI ONLY)
-        const withStatus = filtered.map((u) => ({
+        const withStatus = data.map((u) => ({
           ...u,
           online: Math.random() > 0.5,
         }));
@@ -45,13 +37,12 @@ function AddUser({ onAdd, currentUser }) {
     loadSuggestedUsers();
   }, [currentUser]);
 
-  // 🔍 SEARCH (UNCHANGED)
+  // 🔍 SEARCH
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!username.trim()) return;
 
     setLoading(true);
-
     try {
       const res = await fetch(
         `${API_BASE}/api/users/search/?q=${username}&current_user_id=${currentUser.id}`
@@ -60,14 +51,12 @@ function AddUser({ onAdd, currentUser }) {
 
       const data = await res.json();
 
-      const filtered = data
-        .filter((u) => u.id !== currentUser.id)
-        .map((u) => ({
-          ...u,
-          online: Math.random() > 0.5,
-        }));
+      const withStatus = data.map((u) => ({
+        ...u,
+        online: Math.random() > 0.5,
+      }));
 
-      setResults(filtered);
+      setResults(withStatus);
     } catch (err) {
       console.error(err);
     } finally {
@@ -75,24 +64,19 @@ function AddUser({ onAdd, currentUser }) {
     }
   };
 
-  // ➕ ADD USER (UNCHANGED)
+  // ➕ ADD USER (FIXED ENDPOINT)
   const handleAddUser = async (targetUser) => {
     if (!currentUser?.id) return;
 
     try {
-      const res = await fetch(
-        `${API_BASE}/api/users/search/?q=&current_user_id=${currentUser.id}`
-        
-,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            user_id: currentUser.id,
-            target_user_id: targetUser.id,
-          }),
-        }
-      );
+      const res = await fetch(`${API_BASE}/api/chats/add/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: currentUser.id,
+          target_user_id: targetUser.id,
+        }),
+      });
 
       if (!res.ok) return;
 
@@ -101,8 +85,6 @@ function AddUser({ onAdd, currentUser }) {
     } catch (err) {
       console.error(err);
     }
-    console.log("API_BASE =", API_BASE);
-
   };
 
   return (
@@ -119,7 +101,6 @@ function AddUser({ onAdd, currentUser }) {
         </button>
       </form>
 
-      {/* ⭐ SUGGESTED LABEL */}
       {!username && results.length > 0 && (
         <p className="suggested-title">Suggested for you</p>
       )}
