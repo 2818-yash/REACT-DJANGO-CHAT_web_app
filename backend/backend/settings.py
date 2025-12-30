@@ -6,7 +6,10 @@ SECRET_KEY = 'django-insecure-0y&&c%o2d4%ii+iued5oa26i7k+j*^*2%3^)!3d!40h!$9t)f$
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "react-django-chat-web-app.onrender.com",
+]
+
 
 
 # =========================
@@ -133,7 +136,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    "https://react-django-chat-web-app-vqpo.vercel.app",
 ]
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://react-django-chat-web-app-vqpo.vercel.app",
+]
+
+
 
