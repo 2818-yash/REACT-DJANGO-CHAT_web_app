@@ -1,0 +1,144 @@
+/* Placeholder */
+input::placeholder {
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: bold;
+}
+
+/* LOGIN WRAPPER */
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  padding: 20px; /* ✅ small safe addition for mobile */
+  box-sizing: border-box;
+}
+
+/* LOGIN / REGISTER CARD */
+.login .item {
+  flex: 1;
+  max-width: 420px;
+  width: 100%; /* ✅ helps on small screens */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* FORM */
+.login .item form {
+  width: 100%; /* ✅ form fills card */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* AVATAR */
+.login .item form img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+/* INPUT */
+.login .item form input {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  outline: none;
+  background-color: rgba(35, 35, 248, 0.489);
+  color: white;
+  border-radius: 10px;
+  font-size: 16px; /* ✅ prevents zoom on mobile */
+}
+
+/* FILE LABEL */
+.login .item form label {
+  cursor: pointer;
+  text-decoration: underline;
+  color: white;
+}
+
+/* BUTTON */
+.login .item button {
+  width: 60%;
+  padding: 12px;
+  background-color: rgba(0, 0, 249, 0.8);
+  color: white;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* DISABLED BUTTON */
+.login .item button:disabled {
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 249, 0.3);
+}
+
+/* SEPARATOR */
+.login .separator {
+  height: 80%;
+  width: 2px;
+  background: rgba(112, 29, 139, 0.6);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .login {
+    gap: 50px;
+  }
+
+  .login .item {
+    max-width: 380px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .login {
+    flex-direction: column;
+    height: auto; /* ✅ avoids overflow */
+    gap: 40px;
+  }
+
+  .login .separator {
+    width: 80%;
+    height: 2px;
+  }
+
+  .login .item {
+    max-width: 100%;
+  }
+
+  .login .item button {
+    width: 100%;
+  }
+
+  .login .item form img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+  .login {
+    padding: 15px;
+  }
+
+  .login .item form input {
+    padding: 14px;
+    font-size: 14px;
+  }
+}
