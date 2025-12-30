@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify";
-import { API_BASE } from "@/config";
+// import { API_BASE } from "@/config";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
