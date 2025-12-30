@@ -54,7 +54,7 @@ function AddUser({ onAdd, currentUser }) {
 
     try {
       const res = await fetch(
-        `${API_BASE}/api/users/search/?q=${username}`
+        `${API_BASE}/api/users/search/?q=${username}&current_user_id=${currentUser.id}`
       );
       if (!res.ok) return;
 
@@ -81,7 +81,8 @@ function AddUser({ onAdd, currentUser }) {
 
     try {
       const res = await fetch(
-        `${API_BASE}/api/chats/?user_id=${user.id}`,
+        `${API_BASE}/api/users/search/?q=&current_user_id=${currentUser.id}`
+,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
