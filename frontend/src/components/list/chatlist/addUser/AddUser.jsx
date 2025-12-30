@@ -7,7 +7,6 @@ function AddUser({ onAdd, currentUser }) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // ✅ LOAD SUGGESTED USERS
   useEffect(() => {
     if (!currentUser?.id) return;
 
@@ -20,13 +19,9 @@ function AddUser({ onAdd, currentUser }) {
         if (!res.ok) return;
 
         const data = await res.json();
-
-        const withStatus = data.map((u) => ({
-          ...u,
-          online: Math.random() > 0.5,
-        }));
-
-        setResults(withStatus);
+        setResults(
+          data.map((u) => ({ ...u, online: Math.random() > 0.5 }))
+        );
       } catch (err) {
         console.error(err);
       } finally {
@@ -37,7 +32,6 @@ function AddUser({ onAdd, currentUser }) {
     loadSuggestedUsers();
   }, [currentUser]);
 
-  // 🔍 SEARCH
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!username.trim()) return;
@@ -50,13 +44,9 @@ function AddUser({ onAdd, currentUser }) {
       if (!res.ok) return;
 
       const data = await res.json();
-
-      const withStatus = data.map((u) => ({
-        ...u,
-        online: Math.random() > 0.5,
-      }));
-
-      setResults(withStatus);
+      setResults(
+        data.map((u) => ({ ...u, online: Math.random() > 0.5 }))
+      );
     } catch (err) {
       console.error(err);
     } finally {
@@ -64,7 +54,6 @@ function AddUser({ onAdd, currentUser }) {
     }
   };
 
-  // ➕ ADD USER (FIXED ENDPOINT)
   const handleAddUser = async (targetUser) => {
     if (!currentUser?.id) return;
 
@@ -108,14 +97,7 @@ function AddUser({ onAdd, currentUser }) {
       {results.map((user) => (
         <div className="user" key={user.id}>
           <div className="details">
-            <div className="avatar-wrapper">
-              <img src={user.avatar || "/avatar.png"} alt="" />
-              <span
-                className={`status-dot ${
-                  user.online ? "online" : "offline"
-                }`}
-              />
-            </div>
+            <img src={user.avatar || "/avatar.png"} alt="" />
             <span>{user.username}</span>
           </div>
           <button onClick={() => handleAddUser(user)}>Add</button>
