@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./adduser.css";
-import { API_BASE } from "@/config";
+// import { API_BASE } from "@/config";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 function AddUser({ onAdd, currentUser }) {
   const [username, setUsername] = useState("");
