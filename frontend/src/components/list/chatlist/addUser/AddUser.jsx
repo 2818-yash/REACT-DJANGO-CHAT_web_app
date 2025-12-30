@@ -82,6 +82,7 @@ function AddUser({ onAdd, currentUser }) {
     try {
       const res = await fetch(
         `${API_BASE}/api/users/search/?q=&current_user_id=${currentUser.id}`
+        
 ,
         {
           method: "POST",
@@ -100,6 +101,8 @@ function AddUser({ onAdd, currentUser }) {
     } catch (err) {
       console.error(err);
     }
+    console.log("API_BASE =", API_BASE);
+
   };
 
   return (
