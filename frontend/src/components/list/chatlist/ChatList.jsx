@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import "./chatlist.css";
 import AddUser from "./addUser/AddUser";
+import { API_BASE } from "@/config";
+
+
+
 
 function ChatList({ user, onSelectUser, activeChatUser }) {
   const [addMode, setAddMode] = useState(false);
@@ -12,7 +16,7 @@ function ChatList({ user, onSelectUser, activeChatUser }) {
     const loadChats = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/api/chats/?user_id=${user.id}`
+          `${API_BASE}/api/chats/?user_id=${user.id}`
         );
 
         if (!res.ok) return;
@@ -37,7 +41,7 @@ function ChatList({ user, onSelectUser, activeChatUser }) {
 
   const handleRemoveUser = async (chatUser) => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chats/remove/", {
+      const res = await fetch($`{API_BASE}/api/chats/remove/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

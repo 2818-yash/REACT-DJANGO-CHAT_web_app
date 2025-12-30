@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify";
+import { API_BASE } from "@/config";
+
+
+
 
 function Login({ setUser }) {
   const [avatar, setAvatar] = useState({ file: null, url: "" });
@@ -38,7 +42,7 @@ function Login({ setUser }) {
       sendData.append("password", formData.get("password"));
       sendData.append("avatar", avatar.file);
 
-      const res = await fetch("http://127.0.0.1:8000/api/register/", {
+      const res = await fetch(`${API_BASE}/api/register/`, {
         method: "POST",
         body: sendData,
       });
@@ -74,7 +78,7 @@ function Login({ setUser }) {
     const formData = new FormData(e.target);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/login/", {
+      const res = await fetch(`${API_BASE}/api/login/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -142,7 +146,12 @@ function Login({ setUser }) {
 
           <input type="text" name="username" placeholder="Username" required />
           <input type="email" name="email" placeholder="Email" required />
-          <input type="password" name="password" placeholder="Password" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
 
           <button disabled={loading}>
             {loading ? "Please wait..." : "Sign Up"}

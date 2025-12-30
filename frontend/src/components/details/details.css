@@ -142,7 +142,7 @@
 
 /* ================= RESPONSIVE ================= */
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   .detail {
     flex: none;
     width: 100%;

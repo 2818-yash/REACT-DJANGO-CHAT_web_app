@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
+import { API_BASE, WS_BASE } from "@/config";
+
+
 
 function Chat({ user, activeChatUser }) {
   const [open, setOpen] = useState(false);
@@ -48,7 +51,7 @@ function Chat({ user, activeChatUser }) {
     const loadMessages = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/api/messages/?chat_id=${activeChatUser.chat_id}`
+          `${API_BASE}/api/messages/?chat_id=${activeChatUser.chat_id}`
         );
         const data = await res.json();
         setMessages(data);
@@ -61,7 +64,7 @@ function Chat({ user, activeChatUser }) {
 
     // OPEN SOCKET
     const ws = new WebSocket(
-      `ws://127.0.0.1:8000/ws/chat/${activeChatUser.chat_id}/`
+      `${WS_BASE}/ws/chat/${activeChatUser.chat_id}/`
     );
 
     ws.onopen = () => {
@@ -124,7 +127,7 @@ function Chat({ user, activeChatUser }) {
     formData.append("image", file);
 
     try {
-      await fetch("http://127.0.0.1:8000/api/messages/image/", {
+      await fetch(`${API_BASE}/api/messages/image/`, {
         method: "POST",
         body: formData,
       });
