@@ -47,16 +47,17 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
-    "https://react-django-chat-web-app.vercel.app/",
+    "https://react-django-chat-web-app.vercel.app",
 ]
 
 # =========================
 # CSRF (CRITICAL)
 # =========================
 CSRF_TRUSTED_ORIGINS = [
-    "https://react-django-chat-web-app.vercel.app/",
+    "https://react-django-chat-web-app.vercel.app",
     "https://react-django-chat-web-app.onrender.com",
 ]
+
 
 # =========================
 # URL & TEMPLATES
