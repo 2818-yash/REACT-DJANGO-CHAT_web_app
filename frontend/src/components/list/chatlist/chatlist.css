@@ -156,12 +156,34 @@
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
+  .chatlist {
+    flex: none;
+    width: 100%;
+  }
+
   .search {
     padding: 12px;
+    gap: 10px;
+  }
+
+  .searchBar {
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
+
+  .searchBar input {
+    font-size: 13px;
+  }
+
+  .add {
+    width: 34px;
+    height: 34px;
+    padding: 6px;
   }
 
   .item {
     padding: 12px 14px;
+    gap: 12px;
   }
 
   .item img {
@@ -176,20 +198,56 @@
   .item .texts p {
     font-size: 12px;
   }
+
+  /* Move remove button slightly */
+  .chatlist .item .remove {
+    right: 8px;
+    font-size: 11px;
+    padding: 3px 8px;
+  }
 }
 
+
+
 @media (max-width: 480px) {
+  .search {
+    padding: 10px;
+  }
+
   .searchBar {
-    padding: 8px 12px;
+    gap: 8px;
+    padding: 6px 10px;
+  }
+
+  .searchBar img {
+    width: 16px;
+    height: 16px;
   }
 
   .add {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .item {
+    padding: 10px 12px;
   }
 
   .item img {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .item .texts span {
+    font-size: 13px;
+  }
+
+  .item .texts p {
+    font-size: 11px;
+  }
+
+  /* Hide remove button on very small screens */
+  .chatlist .item .remove {
+    display: none;
   }
 }

@@ -6,55 +6,60 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-/* BODY BASE */
+/* BODY BASE – SCROLL ENABLED */
 body {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  color: #FFFFFF; /* comic white text */
-  overflow: hidden;
+  color: #FFFFFF;
+  overflow-y: auto;   /* ✅ SCROLL ENABLED */
+  overflow-x: hidden;
 }
 
-/* 🔥 BLURRED BACKGROUND LAYER */
+/* 🔥 BLURRED BACKGROUND */
 body::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background-image: url('/bg.jpg');
+  background-image: url("/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(12px);
-  transform: scale(1.06); /* prevents blur edge cut */
+  transform: scale(1.06);
   z-index: -1;
+}
+
+/* APP WRAPPER (CENTER DESKTOP, SCROLL MOBILE) */
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 /* MAIN CONTAINER */
 .container {
   width: 80vw;
-  height: 90vh;
+  min-height: 90vh;     /* ✅ NOT FIXED HEIGHT */
+  height: auto;
 
-  /* COMIC BOOK SPIDER */
-  background-color: rgba(17, 24, 39, 0.88); /* deep comic navy */
+  background-color: rgba(17, 24, 39, 0.88);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
   border-radius: 13px;
-  border: 2px solid #000000; /* comic outline */
+  border: 2px solid #000000;
 
   display: flex;
   overflow: hidden;
 
-  /* STRONG COMIC SHADOW */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
 }
 
-/* PLACEHOLDER */
+/* INPUT PLACEHOLDER */
 input::placeholder {
   color: #CBD5E1;
-  opacity: 1;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
@@ -63,32 +68,35 @@ input::placeholder {
 @media (max-width: 1024px) {
   .container {
     width: 90vw;
-    height: 90vh;
   }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-  body {
-    min-height: 100vh;
-    padding: 20px;
+  .app-wrapper {
+    padding: 10px;
   }
 
   .container {
     width: 100%;
-    height: auto;
-    min-height: 90vh;
-    flex-direction: column;
+    min-height: auto;
+    flex-direction: column;   /* ✅ REAL RESPONSIVE */
+    overflow: visible;        /* ✅ SCROLL ALLOWED */
   }
 }
 
 /* Small Mobile */
 @media (max-width: 480px) {
-  body {
-    padding: 15px;
-  }
-
   .container {
     border-radius: 10px;
   }
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  overscroll-behavior-y: contain;
 }

@@ -182,13 +182,146 @@
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
+  .chat {
+    flex: 1;
+  }
+
+  .chat .top {
+    padding: 14px;
+  }
+
+  .chat .user img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .chat .texts span {
+    font-size: 16px;
+  }
+
+  .chat .texts p {
+    font-size: 13px;
+  }
+
+  .center {
+    padding: 14px;
+    gap: 14px;
+  }
+
   .message {
     max-width: 85%;
   }
+
+  .message .texts {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .bottom {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .bottom input {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .bottom button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
 }
 
+
+
 @media (max-width: 480px) {
+  .chat {
+    height: 100vh;
+  }
+
+  /* TOP */
+  .chat .top {
+    padding: 10px;
+  }
+
+  .chat .user {
+    gap: 12px;
+  }
+
+  .chat .user img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chat .texts span {
+    font-size: 14px;
+  }
+
+  .chat .texts p {
+    font-size: 12px;
+  }
+
+  /* CENTER */
+  .center {
+    padding: 10px;
+    gap: 12px;
+  }
+
   .message {
-    max-width: 90%;
+    max-width: 92%;
+  }
+
+  .message .texts {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .message .texts span {
+    font-size: 10px;
+  }
+
+  /* IMAGE MESSAGE */
+  .message .texts img.chat-image {
+    max-height: 220px;
+    border-radius: 8px;
+  }
+
+  /* BOTTOM */
+  .bottom {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .bottom label img,
+  .bottom .emoji img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottom input {
+    font-size: 13px;
+    padding: 9px 10px;
+    border-radius: 10px;
+  }
+
+  .bottom button {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  /* Emoji picker fix */
+  .emoji {
+    position: relative;
+  }
+
+  .EmojiPickerReact {
+    width: 280px !important;
+    height: 320px !important;
+    position: absolute !important;
+    bottom: 50px;
+    right: 0;
+    z-index: 999;
   }
 }

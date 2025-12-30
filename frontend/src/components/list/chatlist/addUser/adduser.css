@@ -176,26 +176,101 @@
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .adduser {
     width: 90%;
+    max-height: 85vh;
     padding: 20px;
+    overflow-y: auto;
+  }
 
-    form {
-      flex-direction: column;
+  .adduser form {
+    gap: 14px;
+  }
 
-      button {
-        width: 100%;
-      }
-    }
+  .adduser form input {
+    padding: 12px;
+    font-size: 14px;
+  }
 
-    .user {
-      margin-top: 30px;
+  .adduser form button {
+    padding: 12px;
+    font-size: 14px;
+  }
 
-      .details img {
-        width: 42px;
-        height: 42px;
-      }
-    }
+  .adduser .user {
+    margin-top: 24px;
+  }
+
+  .adduser .user .details {
+    gap: 14px;
+  }
+
+  .adduser .user .details img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .adduser {
+    width: 94%;
+    max-height: 90vh;
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  /* FORM */
+  .adduser form {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .adduser form input {
+    padding: 11px;
+    font-size: 13px;
+  }
+
+  .adduser form button {
+    width: 100%;
+    padding: 11px;
+    font-size: 13px;
+  }
+
+  /* USERS LIST */
+  .adduser .user {
+    margin-top: 20px;
+  }
+
+  .adduser .user span {
+    font-size: 13px;
+  }
+
+  .avatar-wrapper {
+    width: 42px;
+    height: 42px;
+  }
+
+  .avatar-wrapper img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .adduser .user button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Suggested label */
+  .suggested-title {
+    font-size: 11px;
+    margin-top: 14px;
   }
 }

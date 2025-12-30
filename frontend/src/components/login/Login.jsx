@@ -6,8 +6,6 @@ function Login({ setUser }) {
   const [avatar, setAvatar] = useState({ file: null, url: "" });
   const [loading, setLoading] = useState(false);
 
-  const API_BASE = import.meta.env.VITE_API_BASE_URL;
-
   // Avatar select
   const handleAvatar = (e) => {
     const file = e.target.files[0];
@@ -40,13 +38,10 @@ function Login({ setUser }) {
       sendData.append("password", formData.get("password"));
       sendData.append("avatar", avatar.file);
 
-      const res = await fetch(
-        `${API_BASE}/api/register/`,
-        {
-          method: "POST",
-          body: sendData,
-        }
-      );
+      const res = await fetch("http://127.0.0.1:8000/api/register/", {
+        method: "POST",
+        body: sendData,
+      });
 
       const data = await res.json();
 
@@ -79,20 +74,18 @@ function Login({ setUser }) {
     const formData = new FormData(e.target);
 
     try {
-      const res = await fetch(
-        `${API_BASE}/api/login/`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: formData.get("loginUsername"),
-            password: formData.get("loginPassword"),
-          }),
-        }
-      );
+      const res = await fetch("http://127.0.0.1:8000/api/login/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: formData.get("loginUsername"),
+          password: formData.get("loginPassword"),
+        }),
+      });
 
       const data = await res.json();
 
+      // ❌ WRONG USERNAME / PASSWORD / BOTH
       if (!res.ok) {
         toast.error("Invalid username or password");
         return;
@@ -149,12 +142,7 @@ function Login({ setUser }) {
 
           <input type="text" name="username" placeholder="Username" required />
           <input type="email" name="email" placeholder="Email" required />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
+          <input type="password" name="password" placeholder="Password" required />
 
           <button disabled={loading}>
             {loading ? "Please wait..." : "Sign Up"}

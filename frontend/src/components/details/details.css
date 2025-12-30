@@ -142,28 +142,120 @@
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 768px) {
+@@media (max-width: 768px) {
   .detail {
-    .user img {
-      width: 52px;
-      height: 52px;
-    }
+    flex: none;
+    width: 100%;
+  }
 
-    .info {
-      padding: 14px;
-    }
+  .detail .user {
+    padding: 12px 8px;
+    gap: 12px;
+  }
+
+  .detail .user img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .detail .user h2 {
+    font-size: 16px;
+  }
+
+  .detail .user p {
+    font-size: 13px;
+  }
+
+  .detail .info {
+    padding: 14px;
+    gap: 18px;
+  }
+
+  .detail .info .option .title span {
+    font-size: 14px;
+  }
+
+  .detail .info .option .title img {
+    width: 26px;
+    height: 26px;
+    padding: 6px;
+  }
+
+  .detail button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .detail .logout {
+    padding: 10px;
   }
 }
 
+
 @media (max-width: 480px) {
   .detail {
-    .user img {
-      width: 46px;
-      height: 46px;
-    }
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+  }
 
-    .info {
-      padding: 12px;
-    }
+  /* USER HEADER */
+  .detail .user {
+    padding: 10px 6px;
+    gap: 10px;
+  }
+
+  .detail .user img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .detail .user h2 {
+    font-size: 15px;
+  }
+
+  .detail .user p {
+    font-size: 12px;
+  }
+
+  /* INFO */
+  .detail .info {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .detail .info .option .title span {
+    font-size: 13px;
+  }
+
+  .detail .info .option .photos {
+    gap: 12px;
+  }
+
+  .detail .info .option .photoItem .photoDetail img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .detail .info .option .photoItem .photoDetail span {
+    font-size: 12px;
+  }
+
+  .detail .info .option .photoItem .icon {
+    width: 26px;
+    height: 26px;
+    padding: 6px;
+  }
+
+  /* BUTTONS */
+  .detail button {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+
+  .detail .logout {
+    padding: 9px;
+    font-size: 13px;
   }
 }

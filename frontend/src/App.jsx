@@ -24,7 +24,7 @@ const App = () => {
         pauseOnHover
         theme="dark"
       />
-
+      <div className="app-wrapper">
       <div className="container">
         {user ? (
           <>
@@ -47,7 +47,7 @@ const App = () => {
         ) : (
           <Login setUser={setUser} />
         )}
-      </div>
+      </div></div>
     </>
   );
 };

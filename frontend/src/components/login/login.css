@@ -7,12 +7,12 @@ input::placeholder {
 /* LOGIN WRAPPER */
 .login {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;        /* ✅ allow content growth */
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 100px;
-  padding: 20px; /* ✅ small safe addition for mobile */
+  gap: 80px;
+  padding: 40px 20px;       /* ✅ scroll-safe padding */
   box-sizing: border-box;
 }
 
@@ -20,7 +20,7 @@ input::placeholder {
 .login .item {
   flex: 1;
   max-width: 420px;
-  width: 100%; /* ✅ helps on small screens */
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -29,11 +29,11 @@ input::placeholder {
 
 /* FORM */
 .login .item form {
-  width: 100%; /* ✅ form fills card */
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
 }
 
 /* AVATAR */
@@ -42,20 +42,18 @@ input::placeholder {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
-  margin: 0 auto;
 }
 
 /* INPUT */
 .login .item form input {
   width: 100%;
-  padding: 18px;
+  padding: 16px;
   border: none;
   outline: none;
   background-color: rgba(35, 35, 248, 0.489);
   color: white;
   border-radius: 10px;
-  font-size: 16px; /* ✅ prevents zoom on mobile */
+  font-size: 16px; /* prevents zoom */
 }
 
 /* FILE LABEL */
@@ -63,22 +61,23 @@ input::placeholder {
   cursor: pointer;
   text-decoration: underline;
   color: white;
+  font-size: 14px;
 }
 
 /* BUTTON */
 .login .item button {
-  width: 60%;
-  padding: 12px;
+  width: 100%;
+  padding: 14px;
   background-color: rgba(0, 0, 249, 0.8);
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   outline: none;
   cursor: pointer;
   font-weight: 500;
 }
 
-/* DISABLED BUTTON */
+/* DISABLED */
 .login .item button:disabled {
   cursor: not-allowed;
   background-color: rgba(0, 0, 249, 0.3);
@@ -86,7 +85,7 @@ input::placeholder {
 
 /* SEPARATOR */
 .login .separator {
-  height: 80%;
+  height: 300px;
   width: 2px;
   background: rgba(112, 29, 139, 0.6);
 }
@@ -99,30 +98,29 @@ input::placeholder {
     gap: 50px;
   }
 
-  .login .item {
-    max-width: 380px;
+  .login .separator {
+    height: 240px;
   }
 }
 
-/* Mobile */
+/* 🔥 MOBILE – REAL RESPONSIVE */
 @media (max-width: 600px) {
   .login {
-    flex-direction: column;
-    height: auto; /* ✅ avoids overflow */
+    flex-direction: column;     /* ✅ REAL COLUMN */
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: auto;           /* ✅ allow scroll */
     gap: 40px;
+    padding: 30px 16px 60px;
   }
 
   .login .separator {
-    width: 80%;
+    width: 100%;
     height: 2px;
   }
 
   .login .item {
     max-width: 100%;
-  }
-
-  .login .item button {
-    width: 100%;
   }
 
   .login .item form img {
@@ -134,7 +132,7 @@ input::placeholder {
 /* Small Mobile */
 @media (max-width: 400px) {
   .login {
-    padding: 15px;
+    padding-bottom: 80px; /* keyboard safe */
   }
 
   .login .item form input {
