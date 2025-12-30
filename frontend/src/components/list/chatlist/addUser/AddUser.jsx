@@ -6,6 +6,8 @@ function AddUser({ onAdd, currentUser }) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
   // ✅ LOAD SUGGESTED USERS
   useEffect(() => {
     if (!currentUser?.id) return;
@@ -14,7 +16,7 @@ function AddUser({ onAdd, currentUser }) {
       setLoading(true);
       try {
         const res = await fetch(
-          "http://127.0.0.1:8000/api/users/search/?q="
+          `${API_BASE}/api/users/search/?q=`
         );
         if (!res.ok) return;
 
@@ -50,7 +52,7 @@ function AddUser({ onAdd, currentUser }) {
 
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/users/search/?q=${username}`
+        `${API_BASE}/api/users/search/?q=${username}`
       );
       if (!res.ok) return;
 
@@ -76,14 +78,17 @@ function AddUser({ onAdd, currentUser }) {
     if (!currentUser?.id) return;
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chats/add/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: currentUser.id,
-          target_user_id: targetUser.id,
-        }),
-      });
+      const res = await fetch(
+        `${API_BASE}/api/chats/?user_id=${user.id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: currentUser.id,
+            target_user_id: targetUser.id,
+          }),
+        }
+      );
 
       if (!res.ok) return;
 

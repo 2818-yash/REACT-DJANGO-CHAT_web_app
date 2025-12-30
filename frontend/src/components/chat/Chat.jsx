@@ -7,10 +7,15 @@ function Chat({ user, activeChatUser }) {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const [socketReady, setSocketReady] = useState(false);
-  const [isBlocked, setIsBlocked] = useState(false); // ✅ ADDED
+  const [isBlocked, setIsBlocked] = useState(false);
 
   const socketRef = useRef(null);
   const endRef = useRef(null);
+
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+  const WS_BASE = API_BASE
+    .replace("https://", "wss://")
+    .replace("http://", "ws://");
 
   // 🔽 Auto scroll
   useEffect(() => {
@@ -23,7 +28,7 @@ function Chat({ user, activeChatUser }) {
       setMessages([]);
       setSocketReady(false);
       setText("");
-      setIsBlocked(false); // ✅ reset block state
+      setIsBlocked(false);
 
       if (socketRef.current) {
         socketRef.current.close();
@@ -38,7 +43,7 @@ function Chat({ user, activeChatUser }) {
 
     setMessages([]);
     setSocketReady(false);
-    setIsBlocked(false); // ✅ reset block state
+    setIsBlocked(false);
 
     if (socketRef.current) {
       socketRef.current.close();
@@ -48,7 +53,7 @@ function Chat({ user, activeChatUser }) {
     const loadMessages = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/api/messages/?chat_id=${activeChatUser.chat_id}`
+          `${API_BASE}/api/messages/?chat_id=${activeChatUser.chat_id}`
         );
         const data = await res.json();
         setMessages(data);
@@ -61,7 +66,7 @@ function Chat({ user, activeChatUser }) {
 
     // OPEN SOCKET
     const ws = new WebSocket(
-      `ws://127.0.0.1:8000/ws/chat/${activeChatUser.chat_id}/`
+      `${WS_BASE}/ws/chat/${activeChatUser.chat_id}/`
     );
 
     ws.onopen = () => {
@@ -72,7 +77,7 @@ function Chat({ user, activeChatUser }) {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
-      // 🔒 BLOCK HANDLING (ONLY ADDITION)
+      // 🔒 BLOCK HANDLING
       if (data.error === "You are blocked") {
         setIsBlocked(true);
         return;
@@ -124,10 +129,13 @@ function Chat({ user, activeChatUser }) {
     formData.append("image", file);
 
     try {
-      await fetch("http://127.0.0.1:8000/api/messages/image/", {
-        method: "POST",
-        body: formData,
-      });
+      await fetch(
+        `${API_BASE}/api/chats/?user_id=${user.id}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
     } catch (err) {
       console.error("Image upload failed", err);
     }

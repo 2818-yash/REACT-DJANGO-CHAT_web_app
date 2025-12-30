@@ -12,7 +12,7 @@ function ChatList({ user, onSelectUser, activeChatUser }) {
     const loadChats = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/api/chats/?user_id=${user.id}`
+          `${import.meta.env.VITE_API_BASE_URL}/api/chats/?user_id=${user.id}`
         );
 
         if (!res.ok) return;
@@ -37,7 +37,8 @@ function ChatList({ user, onSelectUser, activeChatUser }) {
 
   const handleRemoveUser = async (chatUser) => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chats/remove/", {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/chats/?user_id=${user.id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
